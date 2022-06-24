@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Registrate aquí</title> 
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+	 <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--DOM-->
+    <script>
+
+
+        function Mayus(){var n= document.getElementById('nombre');a.value=a.value.toUpperCase(); }
+        function Over(obj){obj.style.background="#aaa";}
+        function Out(obj){obj.style.background="#white";}
+    </script>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-register.css' %}">
+    <script src="{% static 'js/funciones.js' %}"></script>
+
+    <!--jQuery-->
+    <script> 
+        $(function()
+        {
+            $("#formulario").validate({
+                rules:{
+                    email:{required:true,email:true},
+                    nombre: "required",
+                    fecha:"required",
+                    pass1:"required",
+                    pass2:{ required:true, equalTo:"#password"}
+                },
+                messages:{
+                    email:{required: 'ingresa correo electronico', email:'formato de correo no valido'},
+                    nombre:{required:'debes ingresar tu nombre', minlength:'Carácteres insuficientes' },
+                    fecha:{required:'Seleccione fecha válida' ,min:'Fecha no corresponde'},
+                    phone:{minlength:'cantidad de digitos insuficiente'},
+                    pass1:{required:'Ingrese una contraseña',minlength:'Caracteres insuficientes'},
+                    pass2:{required:'Reingrese contraseña',minlength:'Caracteres insuficientes', equalTo:'Su contraseña no es igual'}
+                }
+
+
+            })//$("#formulario").validate
+
+        })//$function
+    </script>
+
+
+
+</head>  
+<body>
+ <form id="formulario"class="formulario" action="register.html" method="post">
+    
+    <h1>Registrate</h1>
+     <div class="contenedor">
+        <label onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Nombre Completo: </label>
+        <div class="input-contenedor">
+         <i class="fas fa-user icon"></i>
+         <input type="text" name="nombre" id="nombre" minlength="5" 
+                placeholder="Nombre Completo" required onchange="Mayus()" >
+         
+         </div>
+         <label for="date" onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Fecha de nacimiento: </label>
+         <div class="input-contenedor">
+            <i class="fas fa-calendar icon"></i>
+            <input type="date" name="fecha" min="1950-01-01"  required>
+            
+            </div>
+        <label onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Correo electronico: </label>
+         <div class="input-contenedor">
+         <i class="fas fa-envelope icon"></i>
+         <input type="text" name="email"  required placeholder="nombre@dom.cl/com" >
+         
+         </div>
+         <label onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Numero de telefono: </label>
+         <div class="input-contenedor">
+            <i class="fas fa-phone icon"></i>
+            <input type="number" name="phone" minlength="9"  placeholder="(opcional)" >
+            
+            </div>
+            
+            <label onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Contraseña: </label>
+         <div class="input-contenedor">
+        <i class="fas fa-key icon"></i>
+         <input type="password" id="password" name="pass1" placeholder="Minimo 8 caracteres" minlength="8" required>
+         
+         </div>
+         <label onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Confirmar contraseña: </label>
+         <div class="input-contenedor">
+        <i class="fas fa-key icon"></i>
+        <input type="password" name="pass2"  minlength="8" required>
+             
+             </div>
+
+        <button class="button">Registrarse</button>
+        <!-- <input type="submit" value="Registrate" class="button">-->
+         <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
+         <p>¿Ya tienes una cuenta?<a class="link" href="{% url 'index'%}">Iniciar Sesion</a></p>
+     </div>html
+    </form>
+</body>
+</html>

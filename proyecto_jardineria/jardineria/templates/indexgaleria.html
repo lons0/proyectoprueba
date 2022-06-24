@@ -1,0 +1,405 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proyecto jardinería</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <link rel="stylesheet"  href="{% static 'css/bootstrap.min.css' %}" text="text/css">
+    <link rel="stylesheet"  href="{% static 'css/style.css' %}" text="text/css"> 
+    <link rel="stylesheet"  href="{% static 'css/style-card.css' %}" text="text/css"> 
+    <link rel="stylesheet" href="{% static 'css/sweetalert2.min.css' %}">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .bgimg{
+          
+            background-size: cover;
+            background-image:url("img/img1 header.jpg");
+            width: auto;height: 450px;
+            overflow: hidden;
+            filter:grayscale(50%)
+        }
+        .header{position: relative;}
+
+        .ctarjeta{
+          justify-content: center;
+          flex-direction: column;
+          display: flex;
+        }
+        .carrusel{background-color:rgba(130, 112, 54, 0.514); border:2px solid rgb(11, 19, 12)}
+    </style>
+    <!--DOM-->
+    
+</head>
+
+
+<body>
+<!--menu bar-->
+    {%load static%}
+  <nav class="navbar navbar-expand-lg navbar-light  fixed-top " style="background-color:#3c7f40">
+    <div class="container-fluid"> 
+      <a  class="navbar-brand" href="#"> 
+        <img src="{% static 'img/logo.png'%}" class="rounded-circle" width="50" height="50" alt="">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones" aria-controls="opciones" aria-expanded="false" aria-label="Toggle navgation" >  
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" style="background-color:#ffffff ;" id="opciones">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'index'%}">HOME</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'quienessomos'%}">QUIENES SOMOS</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="#product">PRODUCTOS</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'quienessomos' %}">INICIAR SESION</a>
+          </li>
+          
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'Contactanos'%}">CONTACTANOS</a>
+          </li>
+          <li class="nav-item dropdown show">
+            <img src="{% static 'img/carro.jpeg'%}" class="nav-link dropdown-toggle img-fluid" height="70px"
+                width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true"img>
+            <div id="carrito" class="dropdown-menu show" aria-labelledby="opciones">
+                <table id="lista-carrito" class="table">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <a href="#" id="vaciar-carrito" class="btn btn-primary btn-block">Vaciar Carrito</a>
+                <a href="{% url 'compra' %}" id="procesar-pedido" class="btn btn-danger btn-block">Procesar
+                    Compra</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            {%if user.is_authenticated %}
+            <li class="nav-item">
+                <a href="{% url '' %]" class="btn btn-success">DATOS</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{% url 'logout' %]" class="btn btn-success">Cerrar sesion</a>
+              <a href="#" >bIENVENIDO @{{user.username}}</a>
+            </li>
+
+            {%else%}
+            <li class="nav-item">
+              <a href="{% url 'login' %]" class="btn btn-success">Iniciar Sesion</a>
+            </li>
+            {%endif%}
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+
+
+
+
+<!--tarjetas con lista de productos-->
+
+<div class="container" id="product">
+  <span class="d-block bg-white py-5" ></span>
+  
+      <h2 style="text-shadow:1px 1px 0 #444; text-align:center">PRODUCTOS</h2>
+        
+      <h3>Arbustos para el hogar</h3>
+
+    <div class="container" id="lista-productos" >
+        <div class="cont-card">
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Arbusto1.jpg' %}" alt="">
+            </div>
+            <div class="product-info">
+                <h4>Arbusto redondo</h4>
+                <h5>Arbusto redondo ideal para decoración de exteriores</h5>
+                <h4 class="precio"><span class="">3.000</span></h4>
+            </div>
+            <!--<div class="btn">
+                <button type="button"> añadir al carro</button>
+            </div>-->
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="1">Añadir al carro</a>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Arbusto 2.jpg' %}" alt="">
+
+            </div>
+            <div class="product-info">
+                <h4>Plantas</h4>
+                <h5>Plantas ideales para decoración en interiores y exteriores</h5>
+                <h4>4.000</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="2">Añadir al carro</a>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Arbusto3.jpg' %}" alt="">
+
+            </div>
+            <div class="product-info">
+                <h4>Plantas de bambú</h4>
+                <h5>Plantas de bambú de 180cm en maceta para exterior e interior</h5>
+                <h4>6.000</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="3">Añadir al carro</a>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <h3>Flores decorativas</h3>
+
+    <div class="container" id="lista-productos" >
+        <div class="cont-card">
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Flores1.jpg' %}" alt="">
+            </div>
+            <div class="product-info">
+                <h4>Set de tulipanes rojos</h4>
+                <h5>Ramos de tulipanes rojos 15 unidades c/u</h5>
+                <h4>2.500</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="4">Añadir al carro</a>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Flores2.jpg' %}" alt="">
+
+            </div>
+            <div class="product-info">
+                <h4>Canasta de rosas</h4>
+                <h5>ramos de rosas de colores variados</h5>
+                <h4>4.300</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="5">Añadir al carro</a>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Flores 3.jpg' %}" alt="">
+
+            </div>
+            <div class="product-info">
+                <h4>Gritasoles</h4>
+                <h5>Ramo de girasoles 3 unidades c/u</h5>
+                <h4>5.000</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="6">Añadir al carro</a>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+    <h3>Tierra de hojas</h3>
+
+    <div class="container "  id="lista-productos">
+        <div class="cont-card">
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Tierra1.jpg' %}" alt="">
+            </div>
+            <div class="product-info">
+                <h4>Tierra de hojas armony</h4>
+                <h5>Bolsa de Tierra de hojas marca armony eco friendly 35 Litros</h5>
+                <h4>25.000</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="7">Añadir al carro</a>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Tierra2.jpg' %}" alt="">
+
+            </div>
+            <div class="product-info">
+                <h4>Tierra anasac</h4>
+                <h5>Bolsa de Tierra de hojas marca anasac 15Litros</h5>
+                <h4>15.000</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="8">Añadir al carro</a>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Tierra3.jpg' %}" alt="">
+
+            </div>
+            <div class="product-info">
+                <h4>Sustrato Garden</h4>
+                <h5>Bolsa de Sustrato para plantas de interior 3Litros</h5>
+                <h4>7.500</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="9">Añadir al carro</a>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+    <h3>Macetas para plantas</h3>
+
+    <div class="container" id="lista-productos" >
+        <div class="cont-card">
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Maceteros1.jpg' %}" alt="">
+            </div>
+            <div class="product-info">
+                <h4>Macetas de ceramica</h4>
+                <h5>Macetas de ceramica colores variados tamaño mediano 1 Unidad</h5>
+                <h4>6.000</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="10">Añadir al carro</a>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="product-image">
+                <img src="{% static 'img/Maceteros2.jpg' %}" alt="">
+
+            </div>
+            <div class="product-info">
+                <h4>set Mini macetas</h4>
+                <h5>Mini macetas para plantas de escritorio con diseños variados</h5>
+                <h4>2.000</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="1">Añadir al carro</a>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="product-image">     
+                <img src="{% static 'img/Maceteros3.jpg' %}" alt="">
+            </div>
+            <div class="product-info">
+                <h4>Macetero de plastico</h4>
+                <h5>Maceteros de plastico para plantas de hogar tamaños pequeños y medianos</h5>
+                <h4>3.500</h4>
+            </div>
+            <div class="btn">
+                <a href="" class=" btn button agregar-carrito" data-id="12">Añadir al carro</a>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <br>
+
+  
+  
+</div>
+
+
+
+<!--footer-->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="footer-col">
+        <h4>compañia</h4>
+        <ul>
+          <li><a href="#">Nuestros servicios</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Programa de afiliación</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Consigue ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas más frecuentes</a></li>
+          <li><a href="#">Envío</a></li>
+          <li><a href="#">Devoluciones</a></li>
+          <li><a href="#">Seguimiento del pedido</a></li>
+          <li><a href="#">Opciones de pago</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Integrantes</h4>
+        <ul>
+          <li><a href="#">Alonso Villena </a></li>
+          <li><a href="#">Patricio Castro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Siguenos</h4>
+        <div class="social-links">
+          <a href="https://es-la.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/?lang=es/"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/?hl=es/"><i class="fab fa-instagram"></i></a>
+          <a href="https://cl.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <br>
+        <h4>Proyecto Jardineria<span style="color:white;font-weight:bold">&#174;</span></h4>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="{% static 'js/bootstrap.min.js' %} "></script>
+    <script src="{% static 'js/sweetalert2.min.js' %}"></script>
+    <script src="{% static 'js/carrito.js' %}"></script>
+    <script src="{% static 'js/pedido.js' %}"></script>
+</body>
+</html>

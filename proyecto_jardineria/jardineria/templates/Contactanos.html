@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Registrate aquí</title> 
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+	 <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--DOM-->
+    <script>
+
+
+        function Over(obj){obj.style.background="#aaa";}
+        function Out(obj){obj.style.background="#white";}
+    </script>
+
+
+    <script>
+         function CambiarMayusculas()
+         {
+            var a = document.getElementById('nombre');
+            a.value = a.value.toUpperCase();
+        }
+
+
+
+    </script>
+
+    <!--jQuery-->
+    <script> 
+        $(function()
+        {
+            $("#formcontacto").validate({
+                rules:{
+                    email:{required:true,email:true},
+                    nombre: "required",
+                },
+                messages:{
+                    email:{required: 'ingresa correo electronico', email:'formato de correo no valido'},
+                    nombre:{required:'debes ingresar tu nombre', minlength:'Carácteres insuficientes' },
+                    asunto:{required:'debes ingresar un asunto'},
+                    Mensaje:{required:'debes ingresar un mensaje',minlength:'Caracteres insuficientes', equalTo:'Su contraseña no es igual'}
+                }
+
+
+            })//$("#formcontacto").validate
+
+        })//$function
+    </script>
+
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-register' %}">
+    <script src="{% static 'js/funciones.js' %}"></script>
+
+
+
+</head>  
+<body>
+ <form id="formcontacto"class="formulario" action="register.html" method="post">
+    
+    <h1 onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">CONTACTANOS</h1>
+     <div class="contenedor">
+        
+        <label for="nom" onmouseover="style.color = 'green'" onmouseout="style.color= 'black'" >nombre: </label>
+        <div class="input-contenedor">
+         <i class="fas fa-user icon"></i>
+         <input type="text" name="nombre" id="nombre" minlength="5" 
+            placeholder="Nombre Completo" required onchange="CambiarMayusculas()" >
+         
+         </div>
+           
+            
+        <label onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Correo Electrónico: </label>
+         <div class="input-contenedor">
+         <i class="fas fa-envelope icon"></i>
+         <input type="text" name="email"  required placeholder="nombre@dom.cl/com" >
+         
+         </div>
+         <label onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Asunto: </label>
+         <div class="input-contenedor">
+            <input type="text" name="asunto"  required>
+            
+            </div>
+
+            <label onmouseover="style.color = 'green'" onmouseout="style.color= 'black'">Mensaje: </label>
+            <div class="container">
+            <textarea  name="Mensaje" class="texto_mensaje" id="mensaje" required="obligatorio" placeholder="Deja aquí tu comentario..."></textarea> 
+          </div>
+        
+        <br>
+        <br>
+
+        <button class="button">Enviar</button>
+        <br>
+        <!-- <input type="submit" value="Registrate" class="button">-->
+         <p onmouseover="style.color = 'red'" onmouseout="style.color= 'black'">En caso de no recibir un correo con una respuesta, colocarse nuevamente en contacto con nosotros.</p>
+
+
+         <a class="link" href="{% url 'index'%}">Volver a la pagina principal</a>
+     </div>
+    </form>
+</body>
+</html>
